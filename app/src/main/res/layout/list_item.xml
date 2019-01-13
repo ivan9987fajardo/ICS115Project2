@@ -15,7 +15,7 @@
         android:id="@+id/list_item_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/list_item_thumbnail"
+
         android:fontFamily="casual"
         android:text="This is row number 15"
         android:textAlignment="viewStart"
