@@ -1,9 +1,14 @@
 package johnivan.fajardo.com.ics115project;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -12,35 +17,42 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-public class View_Recipe extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    TextView row_name,row_ingredients;
-    Intent intent;
-    String text_name,text_ingredients,text_type;
+public class MainActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
 
+    SQLDatabase SQL;
+    SQLiteDatabase SQLDatabase;
+    Cursor c;
+    String firstn,middlen,lastn,num;
+    TextView first_name,middle_name,last_name,cnumber;
 
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.view_recipe1);
-        row_name=(TextView)findViewById(R.id.recipe_name);
-        row_ingredients=(TextView)findViewById(R.id.recipe_ingredients);
-        intent = getIntent();
-        text_name = intent.getStringExtra("name");
-        text_ingredients = intent.getStringExtra("ingredients");
-        text_type = intent.getStringExtra("type");
-
-
-        row_name.setText(text_name);
-        row_ingredients.setText(text_ingredients);
+        setContentView(R.layout.activity_main2);
+        SQL= new SQLDatabase(MainActivity.this,"SQLDB",null,1);
+        SQLDatabase = SQL.getReadableDatabase();
+        c = SQLDatabase.rawQuery("SELECT * FROM users WHERE id = ? ", new String[]{"1"});
+        c.moveToFirst();
+        first_name=(TextView)findViewById(R.id.firstname);
+        middle_name=(TextView)findViewById(R.id.middlename);
+        last_name=(TextView)findViewById(R.id.lastname);
+        cnumber=(TextView)findViewById(R.id.contactnumber);
+        firstn=c.getString(c.getColumnIndex("firstname"));
+        middlen=c.getString(c.getColumnIndex("middlename"));
+        lastn=c.getString(c.getColumnIndex("lastname"));
+        num=c.getString(c.getColumnIndex("number"));
+        first_name.setText("First Name: "+firstn);
+        middle_name.setText("Middle Name: "+middlen);
+        last_name.setText("Last Name: "+lastn);
+        cnumber.setText("Contact Number: "+num);
         loadImageFromStorage("/data/data/johnivan.fajardo.com.ics115project/app_imageDir");
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -54,10 +66,23 @@ public class View_Recipe extends AppCompatActivity implements NavigationView.OnN
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
 
+    private void loadImageFromStorage(String path)
+    {
 
+        try {
+            File f=new File(path, "user"+firstn+middlen+lastn+"profile.jpg");
+            Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
+            ImageView img=(ImageView)findViewById(R.id.user_image);
+            img.setImageBitmap(b);
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
 
-}
+    }
 
     @Override
     public void onBackPressed() {
@@ -100,25 +125,26 @@ public class View_Recipe extends AppCompatActivity implements NavigationView.OnN
         return true;
     }
 
-    private void loadImageFromStorage(String path)
-    {
+    public void recipebtn(View v){
+        Intent i = new Intent(this, Choose_Recipe.class);
+        startActivity(i);
 
-        try {
-            File f=new File(path, text_type+text_name+"profile.jpg");
-            Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
-            ImageView img=(ImageView)findViewById(R.id.preview_recipe_image);
-            img.setImageBitmap(b);
-        }
-        catch (FileNotFoundException e)
-        {
-            e.printStackTrace();
-        }
+    }
+
+    public void myrecipebtn(View v){
+        Intent i = new Intent(this, Recipe_Slider.class);
+        i.putExtra("type", "myrecipe");
+        startActivity(i);
+
+    }
+
+    public void createrecipebtn(View v){
+        Intent i = new Intent(this, Create_Recipe.class);
+        startActivity(i);
 
     }
 
     public void Back(View v){
         onBackPressed();
     }
-
-
 }

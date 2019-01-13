@@ -4,21 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="55dp"
     tools:context=".Choose_Recipe">
 
     <ImageView
         android:id="@+id/home_bg"
         android:layout_width="414dp"
-        android:layout_height="606dp"
+        android:layout_height="736dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.58"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.048"
         app:srcCompat="@drawable/homebg" />
 
     <TextView
@@ -30,7 +31,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:fontFamily="cursive"
-        android:text="CATEGORIES"
+        android:text="RECIPES"
         android:textColor="@android:color/background_light"
         android:textSize="45sp"
         android:textStyle="bold"
@@ -49,14 +50,14 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:onClick="americanbtn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.526"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.982"
-        app:srcCompat="@drawable/americanfood"
-        android:onClick="americanbtn"/>
+        app:srcCompat="@drawable/americanfood" />
 
     <ImageButton
         android:id="@+id/imageButton"
@@ -83,14 +84,14 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:onClick="filipinobtn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.526"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.713"
-        app:srcCompat="@drawable/filipinofood"
-        android:onClick="filipinobtn"/>
+        app:srcCompat="@drawable/filipinofood" />
 
     <ImageButton
         android:id="@+id/imageButton4"
@@ -100,14 +101,14 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:onClick="koreanbtn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.526"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.453"
-        app:srcCompat="@drawable/koreanfood"
-        android:onClick="koreanbtn"/>
+        app:srcCompat="@drawable/koreanfood" />
 
     <TextView
         android:id="@+id/textView7"
